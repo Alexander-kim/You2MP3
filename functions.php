@@ -23,8 +23,8 @@ class you2mp3 extends http {
 	/**
 	 * @var array $forbidden -> List of forbidden word when renaming a file
 	 */
-	private $forbidden_name = array("\\", "/", ":", '?', '"', "<", ">", "|");
-	
+	var $forbidden_name = array("\\", "/", ":", '?', '"', "<", ">", "|");
+
 	/**
 	 * @param string $video_link -> Youtube Link Video that need to get the video link
 	 * @return string -> Return video link with extension.
@@ -79,7 +79,7 @@ class you2mp3 extends http {
 	public function get_video_file_name($link, $extension){
 		global $forbidden_name;
 		preg_match('/\<meta name=\".*\" content=\"(.*?)\"\>/', $this->get_page($link), $title);
-		return str_replace($this->$forbidden_name, "-", $title[1]).".".$this->extension($extension);
+		return str_replace($this->forbidden_name, "-", $title[1]).".".$this->extension($extension);
 	}
 	
 	/**

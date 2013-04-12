@@ -42,6 +42,7 @@ if(empty($admin_username) && empty($admin_password)){
 }
 
 @ini_set('max_execution_time',0);
+@ini_set('memory_limit', '-1');
 
 date_default_timezone_set('Asia/Kuala_Lumpur'); //In new PHP, this is require
 
