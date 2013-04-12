@@ -21,12 +21,12 @@
 /**
  * @var string $admin_username -> Set for admin username.
  */
-$admin_username = "shahril";
+$admin_username = "";
 
 /**
  * @var string $admin_password -> Set for admin password.
  */
-$admin_password = "7a8ffbba2c926578e24e4a49175d31ac"; // In md5(sha1(your password)) for better protection ;)
+$admin_password = ""; // In md5(sha1(your password)) for better protection ;)
 
 /**
  * @var string $admin_cookie -> Set for (hour) time your login cookie will be existence.
