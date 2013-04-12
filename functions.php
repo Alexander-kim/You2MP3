@@ -89,13 +89,14 @@ class you2mp3 extends http {
 	 * @param string $bitrate -> Audio bitrate when converting video to mp3
 	 * @return bool -> If audio conversion success, return true otherwise false
 	 */
-	public function video_to_mp3($video_location, $output_location, $ffmpeg_location, $bitrate = 320){
-		if(system("\"".$ffmpeg_location."\" -i \"".$video_location."\" -vn -ac 2 -ar 44100 -ab ".$bitrate."k -f mp3 \"".$output_location."\"")){
-			return true;
-		}else{
-			return false;
-		}
-	}
+	public function video_to_mp3($video_location, $output_location, $ffmpeg_location, $bitrate = 320){ 
+
+        if(system("\"".getcwd()."/".$ffmpeg_location."\" -i \"".getcwd()."/".$video_location."\" -vn -ac 2 -ar 44100 -ab ".$bitrate."k -f mp3 \"".getcwd()."/".$output_location."\"")){ 
+            return true; 
+        }else{ 
+            return false; 
+        } 
+    } 
 	
 	/**
 	 * @param string $audio_location -> Location where this script will put audio there
