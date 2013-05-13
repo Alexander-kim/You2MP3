@@ -81,13 +81,51 @@ var checklink_regex = /http:\/\/(www.|)youtu(.be|be.com)\/.*/;
  * @return bool -> If user input is valid youtube link, then return true, otherwise false
  */
 function checklink(){
-	var formyoutube_link = document.give_youtube.youtube_link.value;
+	var formyoutube_link = htmlentities(document.give_youtube.youtube_link.value);
 	if(!checklink_regex.test(formyoutube_link)){
 		document.getElementById('change').innerHTML="Link is invalid!<br>";
 		return false;
 	}else{
 		return true;
 	}
+}
+
+/**
+ * htmlentities for javascript
+ * @return string -> htmlentities output
+ */
+function htmlentities (string, quote_style, charset, double_encode) {
+  var hash_map = this.get_html_translation_table('HTML_ENTITIES', quote_style),
+    symbol = '';
+  string = string == null ? '' : string + '';
+
+  if (!hash_map) {
+    return false;
+  }
+
+  if (quote_style && quote_style === 'ENT_QUOTES') {
+    hash_map["'"] = '&#039;';
+  }
+
+  if (!!double_encode || double_encode == null) {
+    for (symbol in hash_map) {
+      if (hash_map.hasOwnProperty(symbol)) {
+        string = string.split(symbol).join(hash_map[symbol]);
+      }
+    }
+  } else {
+    string = string.replace(/([\s\S]*?)(&(?:#\d+|#x[\da-f]+|[a-zA-Z][\da-z]*);|$)/g, function (ignore, text, entity) {
+      for (symbol in hash_map) {
+        if (hash_map.hasOwnProperty(symbol)) {
+          text = text.split(symbol).join(hash_map[symbol]);
+        }
+      }
+
+      return text + entity;
+    });
+  }
+
+  return string;
 }
 
 </script>
@@ -105,7 +143,7 @@ $open = new you2mp3;
 if(isset($_POST['youtube_link']) && $_POST['youtube_link'] != ""){
 	//if($other->check_youtube_link($_POST['youtube_link']) != true){ die("<br><br>Link is invalid!<br>"); }
 	$_POST['youtube_link'] = $other->original_link($_POST['youtube_link']);
-	for($i = 0;$i < 100;$i++){
+	while(true){
 		$array_link = $open->get_youtube_link($_POST['youtube_link']);
 		$process_data = $open->process_array_data($array_link, $quality);
 		$split_data = explode("::::", $process_data);
